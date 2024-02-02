@@ -33,7 +33,7 @@ public class LyricsModule extends Module<SpotifyAddon> {
      * If the lyrics is not synchronized with the actual song
      * then it is possible to shift the voice lines with this variable
      */
-    private static final int VOICE_LINE_SHIFT = -1;
+    private static final int VOICE_LINE_SHIFT = -2;
 
     private final LyricsProvider lyricsProvider = new LyricsProvider();
     private Lyrics lyrics;
