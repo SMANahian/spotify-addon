@@ -27,13 +27,13 @@ import java.awt.image.BufferedImage;
  */
 public class LyricsModule extends Module<SpotifyAddon> {
 
-    private static final Font FONT = new Font("Dialog", FontStyle.PLAIN, 12);
+    private static final Font FONT = new Font("Dialog", FontStyle.PLAIN, 14);
 
     /**
      * If the lyrics is not synchronized with the actual song
      * then it is possible to shift the voice lines with this variable
      */
-    private static final int VOICE_LINE_SHIFT = -2;
+    private static final int VOICE_LINE_SHIFT = -1;
 
     private final LyricsProvider lyricsProvider = new LyricsProvider();
     private Lyrics lyrics;
@@ -48,7 +48,7 @@ public class LyricsModule extends Module<SpotifyAddon> {
     private long customOffsetShift = 0;
 
     public LyricsModule() {
-        super(550, 25);
+        super(550, 29);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class LyricsModule extends Module<SpotifyAddon> {
             // Draw track name
             context.drawString(
                     track == null ? "Spotify" : track.getName(),
-                    this.rightBound ? this.width - this.height - 5 : this.height + 5, (float) 10,
+                    this.rightBound ? this.width - this.height - 5 : this.height + 5, (float) 12,
                     StringAlignment.from(this.rightBound),
                     StringEffect.SHADOW,
                     Color.WHITE,
@@ -144,7 +144,7 @@ public class LyricsModule extends Module<SpotifyAddon> {
             context.drawString(
                     track == null ? "No song playing" : track.getArtist(),
                     this.rightBound ? this.width - this.height - 5 : this.height + 5,
-                    (float) 22,
+                    (float) 26,
                     StringAlignment.from(this.rightBound),
                     StringEffect.SHADOW,
                     Color.WHITE,
@@ -159,13 +159,13 @@ public class LyricsModule extends Module<SpotifyAddon> {
         // Get the progress of the current playing animation
         double animationProgress = (progress - this.lastVoiceLineChanged) / 50d;
 
-        // The progress in a range from 0 to 12
-        double animationProgressInRange = Math.min(animationProgress, 12);
+        // The progress in a range from 0 to 14
+        double animationProgressInRange = Math.min(animationProgress, 14);
 
         // Make it smooth
         if (this.smoothAnimation) {
             double sigmoidInput = animationProgress / 2.0;
-            animationProgressInRange = (1 - Math.exp(-sigmoidInput)) / (1 + Math.exp(-sigmoidInput)) * 12;
+            animationProgressInRange = (1 - Math.exp(-sigmoidInput)) / (1 + Math.exp(-sigmoidInput)) * 14;
         }
 
         // The animated y position of the voice lines
@@ -187,7 +187,7 @@ public class LyricsModule extends Module<SpotifyAddon> {
                 );
             }
 
-            y += 12;
+            y += 14;
         }
     }
 
